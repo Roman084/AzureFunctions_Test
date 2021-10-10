@@ -1,16 +1,44 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using System.Threading.Tasks;
+using FunctionApp.Data;
+using FunctionApp.Profiles;
+using FunctionApp.Services.ProductService;
+using Microsoft.Azure.WebJobs;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace FunctionApp
 {
     public class Program
     {
-        public static void Main()
+        static async Task Main(string[] args)
         {
             var host = new HostBuilder()
-                .ConfigureFunctionsWorkerDefaults()
-                .Build();
+                .ConfigureAppConfiguration(c =>
+                {
+                    c.AddEnvironmentVariables();
+                    c.AddCommandLine(args);
+                })
+                .ConfigureFunctionsWorkerDefaults((c, b) =>
+                {
+                    b.UseFunctionExecutionMiddleware();
+                })
+                .ConfigureServices((context, services) =>
+                {
+                    services.AddDbContext<DataDbContext>(options =>
+                        options.UseSqlServer(context.Configuration.GetConnectionString("DbConnection")));
+                    
+                    
+                    services.AddScoped<IProductService, ProductService>();
 
-            host.Run();
+                    services.AddAutoMapper(typeof(MappingProfile));
+                    
+                    
+                })
+                .Build();
+            
+            await host.RunAsync();
         }
     }
 }
