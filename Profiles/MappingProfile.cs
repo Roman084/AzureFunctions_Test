@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using FunctionApp.Dtos;
-using FunctionApp.Models;
 
 namespace FunctionApp.Profiles
 {
@@ -8,8 +6,6 @@ namespace FunctionApp.Profiles
     {
         public MappingProfile()
         {
-            CreateMap<Product, ProductDto>();
-            CreateMap<ProductDto, Product>();
         }
     }
 }

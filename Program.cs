@@ -1,8 +1,7 @@
 ﻿using System.Threading.Tasks;
 using FunctionApp.Data;
 using FunctionApp.Profiles;
-using FunctionApp.Services.ProductService;
-using Microsoft.Azure.WebJobs;
+using FunctionApp.Services.Customers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,10 +27,9 @@ namespace FunctionApp
                 {
                     services.AddDbContext<DataDbContext>(options =>
                         options.UseSqlServer(context.Configuration.GetConnectionString("DbConnection")));
-                    
-                    
-                    services.AddScoped<IProductService, ProductService>();
 
+
+                    services.AddScoped<ICustomers, CustomersService>();
                     services.AddAutoMapper(typeof(MappingProfile));
                     
                     
