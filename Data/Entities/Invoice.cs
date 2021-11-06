@@ -31,6 +31,7 @@ namespace FunctionApp.Data.Entities
         public int? Search_invoice_id { get; set; }
         public DateTime Overdue { get; set; }
         
+        // Connections properties
         public Guid Customer_id { get; set; }
         public Customer CustomerType { get; set; }
     }

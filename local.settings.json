@@ -1,0 +1,15 @@
+{
+    "IsEncrypted": false,
+    "Values": {
+        "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+        "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+        "AzureWebJobsDashboard": "",
+        "Tokenissuer": "https://res-identityserver-dev.azurewebsites.net"
+    },
+    "ConnectionStrings": {
+        "DbConnection": "Data Source=.;Initial Catalog=resonia-test-db-v2;Integrated Security=True;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;"
+    },
+    "Host": {
+        "CORS": "*"
+    }
+}

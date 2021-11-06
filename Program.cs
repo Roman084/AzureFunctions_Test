@@ -1,11 +1,15 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net.Http;
+using System.Threading.Tasks;
 using FunctionApp.Data;
 using FunctionApp.Profiles;
-using FunctionApp.Services.Customers;
+using FunctionApp.Services.Company;
+using FunctionApp.Utils;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace FunctionApp
 {
@@ -19,23 +23,28 @@ namespace FunctionApp
                     c.AddEnvironmentVariables();
                     c.AddCommandLine(args);
                 })
-                .ConfigureFunctionsWorkerDefaults((c, b) =>
-                {
-                    b.UseFunctionExecutionMiddleware();
-                })
+                .ConfigureFunctionsWorkerDefaults((c, b) => { b.UseFunctionExecutionMiddleware(); })
                 .ConfigureServices((context, services) =>
                 {
                     services.AddDbContext<DataDbContext>(options =>
-                        options.UseSqlServer(context.Configuration.GetConnectionString("DbConnection")));
+                    {
+                        options.UseSqlServer(context.Configuration.GetConnectionString("DbConnection"));
+                    });
 
+                    services.AddControllers().AddNewtonsoftJson().AddNewtonsoftJson(opt =>
+                        opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+                    
+                    // Entities Connection
+                    services.AddScoped<ICompanyRepository, CompanyRepository>();
+                    
 
-                    services.AddScoped<ICustomers, CustomersService>();
+                    services.AddSingleton(typeof(ILogger), typeof(Logger<Program>));
+                    services.AddSingleton(typeof(HttpClient), typeof(HttpClient));
+                    services.AddSingleton(typeof(AuthConnection), typeof(AuthConnection));
                     services.AddAutoMapper(typeof(MappingProfile));
-                    
-                    
                 })
                 .Build();
-            
+
             await host.RunAsync();
         }
     }

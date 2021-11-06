@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FunctionApp.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialCretae : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -40,7 +40,7 @@ namespace FunctionApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BankInfoInvoice",
+                name: "BankInfo",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -53,7 +53,7 @@ namespace FunctionApp.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BankInfoInvoice", x => x.Id);
+                    table.PrimaryKey("PK_BankInfo", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -85,19 +85,19 @@ namespace FunctionApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "InvoiceItems",
+                name: "Invoice_items",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Invoice_item_id = table.Column<int>(type: "int", nullable: false),
-                    Debt_invoice_number = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Interest = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Interest_percent = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    invoice_id = table.Column<int>(type: "int", nullable: false),
+                    debt_invoice_number = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    interest = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    interest_percent = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_InvoiceItems", x => x.Id);
+                    table.PrimaryKey("PK_Invoice_items", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -133,25 +133,25 @@ namespace FunctionApp.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Firstname = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Start_date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    End_date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    StatusPaid = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    firstname = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    status = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    start_date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    end_date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    statusPaid = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StatusProcessing = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Gross_salary = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Net_salary = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Service_cost = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Expenses_cost = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Reimbursment_cost = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Take_home_pay = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Tax_cost = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Yel_cost = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Accidental_insurance = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Social_contribution = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    SumWithoutTax = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Palkka = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Deductions_sum = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    gross_salary = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    net_salary = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    service_cost = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    expenses_cost = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    reimbursment_cost = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    take_home_pay = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    tax_cost = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    yel_cost = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    accidental_insurance = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    social_contribution = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    sumWithoutTax = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    palkka = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    deductions_sum = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -199,7 +199,7 @@ namespace FunctionApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Company",
+                name: "Company_info",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -223,9 +223,9 @@ namespace FunctionApp.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Company", x => x.Id);
+                    table.PrimaryKey("PK_Company_info", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Company_Documents_DocumentId",
+                        name: "FK_Company_info_Documents_DocumentId",
                         column: x => x.DocumentId,
                         principalTable: "Documents",
                         principalColumn: "Id",
@@ -237,29 +237,29 @@ namespace FunctionApp.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Customer_id = table.Column<int>(type: "int", nullable: false),
-                    Country = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Company_name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Business_id = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Person_to_contact = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Person_to_contact_email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Delivery_address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Zip_code = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Web_invoice = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Finvoice_operator = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Delivery_method = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Customer_type = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    customer_id = table.Column<int>(type: "int", nullable: false),
+                    country = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    company_name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    business_id = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    person_to_contact = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    person_to_contact_email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    delivery_address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    zip_code = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    city = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    web_invoice = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    finvoice_operator = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    delivery_method = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    customer_type = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CompanyId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Customers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Customers_Company_CompanyId",
+                        name: "FK_Customers_Company_info_CompanyId",
                         column: x => x.CompanyId,
-                        principalTable: "Company",
+                        principalTable: "Company_info",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -295,8 +295,7 @@ namespace FunctionApp.Migrations
                     Search_invoice_id = table.Column<int>(type: "int", nullable: true),
                     Overdue = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Customer_id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CustomerTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    SalaryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    CustomerTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -307,17 +306,11 @@ namespace FunctionApp.Migrations
                         principalTable: "Customers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Invoice_Salary_SalaryId",
-                        column: x => x.SalaryId,
-                        principalTable: "Salary",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Company_DocumentId",
-                table: "Company",
+                name: "IX_Company_info_DocumentId",
+                table: "Company_info",
                 column: "DocumentId");
 
             migrationBuilder.CreateIndex(
@@ -329,11 +322,6 @@ namespace FunctionApp.Migrations
                 name: "IX_Invoice_CustomerTypeId",
                 table: "Invoice",
                 column: "CustomerTypeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Invoice_SalaryId",
-                table: "Invoice",
-                column: "SalaryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_InvoiceAllowancePassengers_AllowancesId",
@@ -349,7 +337,7 @@ namespace FunctionApp.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "BankInfoInvoice");
+                name: "BankInfo");
 
             migrationBuilder.DropTable(
                 name: "CompanyUpdates");
@@ -358,28 +346,28 @@ namespace FunctionApp.Migrations
                 name: "Invoice");
 
             migrationBuilder.DropTable(
+                name: "Invoice_items");
+
+            migrationBuilder.DropTable(
                 name: "InvoiceAllowancePassengers");
 
             migrationBuilder.DropTable(
                 name: "InvoiceAllowanceRouteItems");
 
             migrationBuilder.DropTable(
-                name: "InvoiceItems");
-
-            migrationBuilder.DropTable(
                 name: "ResoniaApp");
-
-            migrationBuilder.DropTable(
-                name: "Customers");
 
             migrationBuilder.DropTable(
                 name: "Salary");
 
             migrationBuilder.DropTable(
+                name: "Customers");
+
+            migrationBuilder.DropTable(
                 name: "Allowances");
 
             migrationBuilder.DropTable(
-                name: "Company");
+                name: "Company_info");
 
             migrationBuilder.DropTable(
                 name: "Documents");

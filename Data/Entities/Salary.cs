@@ -6,26 +6,24 @@ namespace FunctionApp.Data.Entities
     public class Salary
     {
         public Guid Id { get; set; }
-        public string Firstname { get; set; }
-        public string Status { get; set; }
-        public DateTime Start_date { get; set; }
-        public DateTime End_date { get; set; }
-        public string StatusPaid { get; set; }
+        public string firstname { get; set; }
+        public string status { get; set; }
+        public DateTime start_date { get; set; }
+        public DateTime end_date { get; set; }
+        public string statusPaid { get; set; }
         public string StatusProcessing { get; set; }
-        public decimal Gross_salary { get; set; }
-        public decimal Net_salary { get; set; }
-        public decimal Service_cost { get; set; }
-        public decimal Expenses_cost { get; set; }
-        public decimal Reimbursment_cost { get; set; }
-        public decimal Take_home_pay { get; set; }
-        public decimal Tax_cost { get; set; }
-        public decimal Yel_cost { get; set; }
-        public decimal Accidental_insurance { get; set; }
-        public decimal Social_contribution { get; set; }
-        public decimal SumWithoutTax { get; set; }
-        public decimal Palkka { get; set; }
-        public decimal Deductions_sum { get; set; }
-        
-        public ICollection<Invoice> Invoices { get; set; }
+        public decimal gross_salary { get; set; }
+        public decimal net_salary { get; set; }
+        public decimal service_cost { get; set; }
+        public decimal expenses_cost { get; set; }
+        public decimal reimbursment_cost { get; set; }
+        public decimal take_home_pay { get; set; }
+        public decimal tax_cost { get; set; }
+        public decimal yel_cost { get; set; }
+        public decimal accidental_insurance { get; set; }
+        public decimal social_contribution { get; set; }
+        public decimal sumWithoutTax { get; set; }
+        public decimal palkka { get; set; }
+        public decimal deductions_sum { get; set; }
     }
 }

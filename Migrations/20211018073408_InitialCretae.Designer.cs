@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FunctionApp.Migrations
 {
     [DbContext(typeof(DataDbContext))]
-    [Migration("20211011132216_DeletedCustomerIdAndTitle")]
-    partial class DeletedCustomerIdAndTitle
+    [Migration("20211018073408_InitialCretae")]
+    partial class InitialCretae
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -121,7 +121,7 @@ namespace FunctionApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("BankInfoInvoice");
+                    b.ToTable("BankInfo");
                 });
 
             modelBuilder.Entity("FunctionApp.Data.Entities.Company", b =>
@@ -185,7 +185,7 @@ namespace FunctionApp.Migrations
 
                     b.HasIndex("DocumentId");
 
-                    b.ToTable("Company");
+                    b.ToTable("Company_info");
                 });
 
             modelBuilder.Entity("FunctionApp.Data.Entities.CompanyUpdates", b =>
@@ -208,46 +208,49 @@ namespace FunctionApp.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Business_id")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<Guid?>("CompanyId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Company_name")
+                    b.Property<string>("business_id")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Country")
+                    b.Property<string>("city")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Customer_type")
+                    b.Property<string>("company_name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Delivery_address")
+                    b.Property<string>("country")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Delivery_method")
+                    b.Property<int>("customer_id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("customer_type")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Finvoice_operator")
+                    b.Property<string>("delivery_address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Person_to_contact")
+                    b.Property<string>("delivery_method")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Person_to_contact_email")
+                    b.Property<string>("finvoice_operator")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Phone")
+                    b.Property<string>("person_to_contact")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Web_invoice")
+                    b.Property<string>("person_to_contact_email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Zip_code")
+                    b.Property<string>("phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("web_invoice")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("zip_code")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -358,9 +361,6 @@ namespace FunctionApp.Migrations
                     b.Property<int>("Remindersent")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("SalaryId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int?>("Search_invoice_id")
                         .HasColumnType("int");
 
@@ -376,8 +376,6 @@ namespace FunctionApp.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerTypeId");
-
-                    b.HasIndex("SalaryId");
 
                     b.ToTable("Invoice");
                 });
@@ -432,24 +430,24 @@ namespace FunctionApp.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<decimal>("Amount")
+                    b.Property<decimal>("amount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("Debt_invoice_number")
+                    b.Property<string>("debt_invoice_number")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Interest")
+                    b.Property<decimal>("interest")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal>("Interest_percent")
+                    b.Property<decimal>("interest_percent")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("Invoice_item_id")
+                    b.Property<int>("invoice_id")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("InvoiceItems");
+                    b.ToTable("Invoice_items");
                 });
 
             modelBuilder.Entity("FunctionApp.Data.Entities.ResoniaApp", b =>
@@ -520,61 +518,61 @@ namespace FunctionApp.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<decimal>("Accidental_insurance")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("Deductions_sum")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("End_date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<decimal>("Expenses_cost")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("Firstname")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Gross_salary")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("Net_salary")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("Palkka")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("Reimbursment_cost")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("Service_cost")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("Social_contribution")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("Start_date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Status")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StatusPaid")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("StatusProcessing")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("SumWithoutTax")
+                    b.Property<decimal>("accidental_insurance")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal>("Take_home_pay")
+                    b.Property<decimal>("deductions_sum")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal>("Tax_cost")
+                    b.Property<DateTime>("end_date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("expenses_cost")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal>("Yel_cost")
+                    b.Property<string>("firstname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("gross_salary")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("net_salary")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("palkka")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("reimbursment_cost")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("service_cost")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("social_contribution")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("start_date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("statusPaid")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("sumWithoutTax")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("take_home_pay")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("tax_cost")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("yel_cost")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
@@ -601,12 +599,8 @@ namespace FunctionApp.Migrations
             modelBuilder.Entity("FunctionApp.Data.Entities.Invoice", b =>
                 {
                     b.HasOne("FunctionApp.Data.Entities.Customer", "CustomerType")
-                        .WithMany("Invoice")
+                        .WithMany("invoice")
                         .HasForeignKey("CustomerTypeId");
-
-                    b.HasOne("FunctionApp.Data.Entities.Salary", null)
-                        .WithMany("Invoices")
-                        .HasForeignKey("SalaryId");
 
                     b.Navigation("CustomerType");
                 });
@@ -639,12 +633,7 @@ namespace FunctionApp.Migrations
 
             modelBuilder.Entity("FunctionApp.Data.Entities.Customer", b =>
                 {
-                    b.Navigation("Invoice");
-                });
-
-            modelBuilder.Entity("FunctionApp.Data.Entities.Salary", b =>
-                {
-                    b.Navigation("Invoices");
+                    b.Navigation("invoice");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using FunctionApp.Data.Dtos.Company;
+using FunctionApp.Data.Entities;
 
 namespace FunctionApp.Profiles
 {
@@ -6,6 +8,7 @@ namespace FunctionApp.Profiles
     {
         public MappingProfile()
         {
+            CreateMap<Company, RegisterCompanyDto>(MemberList.Destination);
         }
     }
 }
